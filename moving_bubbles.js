@@ -20,8 +20,8 @@ export const MovingBubbles = {
       shape.graphics.beginRadialGradientFill(
                   ["#cfe0e8", "#2389da" ],
                   [ 0.25, 1 ],
-                  0, 0, 0,
-                  0, 0, radius).drawCircle(0, 0, radius);
+                  5, -5, 0,
+                  5, -5, radius).drawCircle(0, 0, radius);
   		shape.x = Math.random() * canvas.width;
   		shape.y = Math.random() * canvas.height;
       const xVels = [0.1, -0.1];
