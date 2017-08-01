@@ -116,9 +116,10 @@ const MovingBubbles = {
                   0, 0, radius).drawCircle(0, 0, radius);
   		shape.x = Math.random() * canvas.width;
   		shape.y = Math.random() * canvas.height;
-  		shape.velX = 0;
-  		shape.velY = - Math.abs(Math.random() + 1) ;
-  		shape.velY = (shape.velY < 0 ? shape.velY : -1) ;
+      const xVels = [0.1, -0.1];
+  		shape.velX = xVels[Math.random() * xVels.length | 0];
+  		shape.velY = - Math.abs(Math.random() + 0.2) ;
+  		// shape.velY = (shape.velY < 0 ? shape.velY : -1) ;
   		// shape.velY = - 1;
 
   		// turn snapToPixel on for all shapes - it's set to false by default on Shape.
