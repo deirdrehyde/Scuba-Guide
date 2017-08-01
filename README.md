@@ -12,6 +12,8 @@ With this scuba gear setup guide, users will be able to:
 - [ ] Navigate between steps & select to start from the beginning
 - [ ] Select equipment to expand for more information about the item
 - [ ] Clearly read and understand the gear setup steps
+- [ ] User is able to drag and drop equipment into place to move onto next step
+- [ ] User will deflate the scuba diver's BC once equipment is set up to have the diver descend
 - [ ] Fun and inspirational visuals that make the user feel underwater
 
 In addition, this project will include:
