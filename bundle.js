@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function(){
 var canvas;
 var stage;
 var shape;
-var radius = 10;
+var radius = 7;
 
 
 const MovingBubbles = {
@@ -106,7 +106,7 @@ const MovingBubbles = {
 
     const colors=["#b7d7e8", "#cfe0e8"]
 
-    for (var i = 0; i < 200; i++) {
+    for (var i = 0; i < 300; i++) {
   		shape = new createjs.Shape();
 
       shape.graphics.beginRadialGradientFill(
