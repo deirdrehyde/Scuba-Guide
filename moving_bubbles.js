@@ -2,7 +2,7 @@ var canvas;
 var stage;
 var shape;
 var radius = 10;
-var rings = 40;
+
 
 export const MovingBubbles = {
 
@@ -12,22 +12,22 @@ export const MovingBubbles = {
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
 
-    // var circle = new createjs.Shape();
-    // circle.graphics.beginFill("#b7d7e8").drawCircle(0, 0, radius);
-    // circle.x = 100;
-    // circle.y = 100;
-    // stage.addChild(circle);
     const colors=["#b7d7e8", "#cfe0e8"]
 
     for (var i = 0; i < 200; i++) {
   		shape = new createjs.Shape();
-  		for (var j = rings; j > 0; j--) {
-  			shape.graphics.beginFill(colors[Math.random() * colors.length | 0]).drawCircle(0, 0, radius * j / rings);
-  		}
+
+      shape.graphics.beginRadialGradientFill(
+                  ["#cfe0e8", "#2389da" ],
+                  [ 0.25, 1 ],
+                  0, 0, 0,
+                  0, 0, radius).drawCircle(0, 0, radius);
   		shape.x = Math.random() * canvas.width;
   		shape.y = Math.random() * canvas.height;
   		shape.velX = 0;
-  		shape.velY = - Math.abs(Math.random() * 10 - 5);
+  		shape.velY = - Math.abs(Math.random() + 1) ;
+  		shape.velY = (shape.velY < 0 ? shape.velY : -1) ;
+  		// shape.velY = - 1;
 
   		// turn snapToPixel on for all shapes - it's set to false by default on Shape.
   		// it won't do anything until stage.snapToPixelEnabled is set to true.
