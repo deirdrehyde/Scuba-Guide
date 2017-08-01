@@ -71,13 +71,15 @@
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_bubbles__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fish__ = __webpack_require__(6);
+
 
 
 document.addEventListener("DOMContentLoaded", function(){
   // const canvas = document.getElementById('backgroundCanvas'); // in your HTML this element appears as <canvas id="myCanvas"></canvas>
 
 
-
+  __WEBPACK_IMPORTED_MODULE_1__fish__["a" /* Fish */].init();
   __WEBPACK_IMPORTED_MODULE_0__moving_bubbles__["a" /* MovingBubbles */].init();
 
 });
@@ -103,6 +105,12 @@ const MovingBubbles = {
     // create a new stage and point it at our canvas:
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
+    const fishImage = new createjs.Bitmap("./fish.png");
+    fishImage.scaleX=0.4;
+    fishImage.scaleY = 0.4;
+    fishImage.x = 900;
+    fishImage.y = 600;
+    stage.addChild(fishImage);
 
     const colors=["#b7d7e8", "#cfe0e8"]
 
@@ -153,6 +161,22 @@ const MovingBubbles = {
 
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = MovingBubbles;
+
+
+
+/***/ }),
+/* 5 */,
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const Fish = {
+  init() {
+
+    const fishImage = new createjs.Bitmap("./fish.png");
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Fish;
 
 
 

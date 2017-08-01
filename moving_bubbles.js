@@ -11,6 +11,12 @@ export const MovingBubbles = {
     // create a new stage and point it at our canvas:
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
+    const fishImage = new createjs.Bitmap("./fish.png");
+    fishImage.scaleX=0.4;
+    fishImage.scaleY = 0.4;
+    fishImage.x = 900;
+    fishImage.y = 600;
+    stage.addChild(fishImage);
 
     const colors=["#b7d7e8", "#cfe0e8"]
 
