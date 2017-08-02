@@ -1,7 +1,9 @@
-var canvas;
-var stage;
-var shape;
-var radius = 7;
+import { Fish } from "./fish";
+
+let canvas;
+let stage;
+let shape;
+let radius = 7;
 
 
 export const MovingBubbles = {
@@ -11,12 +13,40 @@ export const MovingBubbles = {
     // create a new stage and point it at our canvas:
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
-    const fishImage = new createjs.Bitmap("./fish.png");
+
+    const image = document.createElement("img");
+    image.crossOrigin = "Anonymous";
+    image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693075/fish_nz0rni.png";
+    const fishImage = new createjs.Bitmap(image);
     fishImage.scaleX=0.4;
     fishImage.scaleY = 0.4;
     fishImage.x = 900;
     fishImage.y = 600;
+
     stage.addChild(fishImage);
+
+    fishImage.on("pressmove", function(evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
+
+
+    const fins = document.createElement("img");
+    fins.crossOrigin = "Anonymous";
+    fins.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693832/fins_cfb9y5.png";
+    const finImage = new createjs.Bitmap(fins);
+    finImage.scaleX=0.1;
+    finImage.scaleY = 0.1;
+    finImage.x = 100;
+    finImage.y = 100;
+    stage.addChild(finImage);
+
+
+    finImage.on("pressmove", function(evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
+
 
     const colors=["#b7d7e8", "#cfe0e8"]
 
@@ -33,8 +63,7 @@ export const MovingBubbles = {
       const xVels = [0.1, -0.1];
   		shape.velX = xVels[Math.random() * xVels.length | 0];
   		shape.velY = - Math.abs(Math.random() + 0.2) ;
-  		// shape.velY = (shape.velY < 0 ? shape.velY : -1) ;
-  		// shape.velY = - 1;
+
 
   		// turn snapToPixel on for all shapes - it's set to false by default on Shape.
   		// it won't do anything until stage.snapToPixelEnabled is set to true.

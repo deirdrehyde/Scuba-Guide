@@ -60,89 +60,108 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_bubbles__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fish__ = __webpack_require__(6);
 
 
+var _moving_bubbles = __webpack_require__(1);
 
-document.addEventListener("DOMContentLoaded", function(){
+var _fins = __webpack_require__(2);
+
+var _fish = __webpack_require__(3);
+
+document.addEventListener("DOMContentLoaded", function () {
   // const canvas = document.getElementById('backgroundCanvas'); // in your HTML this element appears as <canvas id="myCanvas"></canvas>
 
-
-  __WEBPACK_IMPORTED_MODULE_1__fish__["a" /* Fish */].init();
-  __WEBPACK_IMPORTED_MODULE_0__moving_bubbles__["a" /* MovingBubbles */].init();
-
+  // Fins.init();
+  // Fish.init();
+  _moving_bubbles.MovingBubbles.init();
 });
 
-
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var canvas;
-var stage;
-var shape;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MovingBubbles = undefined;
+
+var _fish = __webpack_require__(3);
+
+var canvas = void 0;
+var stage = void 0;
+var shape = void 0;
 var radius = 7;
 
-
-const MovingBubbles = {
-
-
-  init() {
+var MovingBubbles = exports.MovingBubbles = {
+  init: function init() {
     // create a new stage and point it at our canvas:
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
-    const fishImage = new createjs.Bitmap("./fish.png");
-    fishImage.scaleX=0.4;
+
+    var image = document.createElement("img");
+    image.crossOrigin = "Anonymous";
+    image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693075/fish_nz0rni.png";
+    var fishImage = new createjs.Bitmap(image);
+    fishImage.scaleX = 0.4;
     fishImage.scaleY = 0.4;
     fishImage.x = 900;
     fishImage.y = 600;
+
     stage.addChild(fishImage);
 
-    const colors=["#b7d7e8", "#cfe0e8"]
+    fishImage.on("pressmove", function (evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
+
+    var fins = document.createElement("img");
+    fins.crossOrigin = "Anonymous";
+    fins.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693832/fins_cfb9y5.png";
+    var finImage = new createjs.Bitmap(fins);
+    finImage.scaleX = 0.1;
+    finImage.scaleY = 0.1;
+    finImage.x = 100;
+    finImage.y = 100;
+    stage.addChild(finImage);
+
+    finImage.on("pressmove", function (evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
+
+    var colors = ["#b7d7e8", "#cfe0e8"];
 
     for (var i = 0; i < 300; i++) {
-  		shape = new createjs.Shape();
+      shape = new createjs.Shape();
 
-      shape.graphics.beginRadialGradientFill(
-                  ["#cfe0e8", "#2389da" ],
-                  [ 0.25, 1 ],
-                  5, -5, 0,
-                  5, -5, radius).drawCircle(0, 0, radius);
-  		shape.x = Math.random() * canvas.width;
-  		shape.y = Math.random() * canvas.height;
-      const xVels = [0.1, -0.1];
-  		shape.velX = xVels[Math.random() * xVels.length | 0];
-  		shape.velY = - Math.abs(Math.random() + 0.2) ;
-  		// shape.velY = (shape.velY < 0 ? shape.velY : -1) ;
-  		// shape.velY = - 1;
+      shape.graphics.beginRadialGradientFill(["#cfe0e8", "#2389da"], [0.25, 1], 5, -5, 0, 5, -5, radius).drawCircle(0, 0, radius);
+      shape.x = Math.random() * canvas.width;
+      shape.y = Math.random() * canvas.height;
+      var xVels = [0.1, -0.1];
+      shape.velX = xVels[Math.random() * xVels.length | 0];
+      shape.velY = -Math.abs(Math.random() + 0.2);
 
-  		// turn snapToPixel on for all shapes - it's set to false by default on Shape.
-  		// it won't do anything until stage.snapToPixelEnabled is set to true.
-  		shape.snapToPixel = true;
+      // turn snapToPixel on for all shapes - it's set to false by default on Shape.
+      // it won't do anything until stage.snapToPixelEnabled is set to true.
+      shape.snapToPixel = true;
 
-  		stage.addChild(shape);
-  	};
+      stage.addChild(shape);
+    };
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
-	  createjs.Ticker.addEventListener("tick", this.tick);
-
-
+    createjs.Ticker.addEventListener("tick", this.tick);
   },
-
-  tick(event) {
+  tick: function tick(event) {
     var w = canvas.width + radius * 2;
     var h = canvas.height + radius * 2;
     var l = stage.getNumChildren() - 1;
@@ -154,31 +173,74 @@ const MovingBubbles = {
       shape.y = (shape.y + radius + shape.velY + h) % h - radius;
     }
 
-
     // draw the updates to stage:
     stage.update(event);
   }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = MovingBubbles;
-
-
+};
 
 /***/ }),
-/* 5 */,
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-const Fish = {
-  init() {
 
-    const fishImage = new createjs.Bitmap("./fish.png");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Fins = exports.Fins = {
+  init: function init() {
+
+    var canvas = document.getElementById("backgroundCanvas");
+    var stage = new createjs.Stage(canvas);
+    var image = document.createElement("img");
+    image.crossOrigin = "Anonymous";
+    image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693832/fins_cfb9y5.png";
+    var finImage = new createjs.Bitmap(image);
+    finImage.scaleX = 0.4;
+    finImage.scaleY = 0.4;
+    finImage.x = 900;
+    finImage.y = 600;
+    stage.addChild(finImage);
+
+    finImage.on("pressmove", function (evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
   }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Fish;
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Fish = exports.Fish = {
+  init: function init() {
+    var canvas = document.getElementById("backgroundCanvas");
+    var stage = new createjs.Stage(canvas);
+    var image = document.createElement("img");
+    image.crossOrigin = "Anonymous";
+    image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693075/fish_nz0rni.png";
+    var fishImage = new createjs.Bitmap(image);
+    fishImage.scaleX = 0.4;
+    fishImage.scaleY = 0.4;
+    fishImage.x = 900;
+    fishImage.y = 600;
+
+    stage.addChild(fishImage);
+
+    fishImage.on("pressmove", function (evt) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+    });
+  }
+};
 
 /***/ })
 /******/ ]);
