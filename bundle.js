@@ -109,33 +109,79 @@ var MovingBubbles = exports.MovingBubbles = {
     canvas = document.getElementById("backgroundCanvas");
     stage = new createjs.Stage(canvas);
 
-    var image = document.createElement("img");
-    image.crossOrigin = "Anonymous";
-    image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693075/fish_nz0rni.png";
-    var fishImage = new createjs.Bitmap(image);
-    fishImage.scaleX = 0.4;
-    fishImage.scaleY = 0.4;
-    fishImage.x = 900;
-    fishImage.y = 600;
+    // const image = document.createElement("img");
+    // image.crossOrigin = "Anonymous";
+    // image.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693075/fish_nz0rni.png";
+    // const fishImage = new createjs.Bitmap(image);
+    // fishImage.scaleX=0.4;
+    // fishImage.scaleY = 0.4;
+    // fishImage.x = 900;
+    // fishImage.y = 600;
+    //
+    // stage.addChild(fishImage);
+    //
+    // fishImage.on("pressmove", function(evt) {
+    //   evt.target.x = evt.stageX;
+    //   evt.target.y = evt.stageY;
+    // });
+    //
+    //
+    // const fins = document.createElement("img");
+    // fins.crossOrigin = "Anonymous";
+    // fins.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693832/fins_cfb9y5.png";
+    // const finImage = new createjs.Bitmap(fins);
+    // finImage.scaleX=0.1;
+    // finImage.scaleY = 0.1;
+    // finImage.x = 100;
+    // finImage.y = 100;
+    // stage.addChild(finImage);
+    //
+    //
+    // finImage.on("pressmove", function(evt) {
+    //   evt.target.x = evt.stageX;
+    //   evt.target.y = evt.stageY;
+    // });
 
-    stage.addChild(fishImage);
+    // const tank = document.createElement("img");
+    // tank.crossOrigin = "Anonymous";
+    // tank.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501697940/tanks_fdyxtm.png";
+    // const tankImage = new createjs.Bitmap(tank);
+    // tankImage.scaleX=0.1;
+    // tankImage.scaleY = 0.1;
+    // tankImage.x = 600;
+    // tankImage.y = 100;
+    // stage.addChild(tankImage);
+    //
+    //
+    // tankImage.on("pressmove", function(evt) {
+    //   evt.target.x = evt.stageX;
+    //   evt.target.y = evt.stageY;
+    // });
 
-    fishImage.on("pressmove", function (evt) {
-      evt.target.x = evt.stageX;
-      evt.target.y = evt.stageY;
+    var diver = document.createElement("img");
+    diver.crossOrigin = "Anonymous";
+    diver.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501700864/diver_rhrufg.png";
+    var diverImage = new createjs.Bitmap(diver);
+    diverImage.scaleX = 0.5;
+    diverImage.scaleY = 0.5;
+    diverImage.x = 100;
+    diverImage.y = 100;
+    stage.addChild(diverImage);
+
+    diverImage.on("mousedown", function (evt) {
+      var ct = evt.currentTarget,
+          local = ct.globalToLocal(evt.stageX, evt.stageY),
+          nx = ct.regX - local.x,
+          ny = ct.regY - local.y;
+      //set the new regX/Y
+      ct.regX = local.x;
+      ct.regY = local.y;
+      //adjust the real-position, otherwise the new regX/Y would cause a jump
+      ct.x -= nx;
+      ct.y -= ny;
     });
 
-    var fins = document.createElement("img");
-    fins.crossOrigin = "Anonymous";
-    fins.src = "http://res.cloudinary.com/douzdapki/image/upload/v1501693832/fins_cfb9y5.png";
-    var finImage = new createjs.Bitmap(fins);
-    finImage.scaleX = 0.1;
-    finImage.scaleY = 0.1;
-    finImage.x = 100;
-    finImage.y = 100;
-    stage.addChild(finImage);
-
-    finImage.on("pressmove", function (evt) {
+    diverImage.on("pressmove", function (evt) {
       evt.target.x = evt.stageX;
       evt.target.y = evt.stageY;
     });
